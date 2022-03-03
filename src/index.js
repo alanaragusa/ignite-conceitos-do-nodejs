@@ -12,15 +12,34 @@ app.use(express.json());
 const users = [];
 
 function checksExistsUserAccount(request, response, next) {
-  // Complete aqui
+  const { username } = request.headers; 
+
+  // procurar se existe algum usuário com o username já cadastrado //
+  const users = users.find(users => users.username === username);
+
+  // verificação da existência do usuário //
+  if(!users){
+    return response.status(400).json({error:"User not found"})
+  }
+
+  return next();
 }
 
 app.post('/users', (request, response) => {
   const { name, username } = request.body;
-  const id = uuidv4();
 
+  // checando se o username do novo cadastro já existe //
+  const userAlreadyExists = users.some(
+    (users) => users.username === username
+  );
+
+  if (usersAlreadyExists) {
+    return response.status(400).json({error: "User already exists."})
+  };
+  
+  // push para enviar a informação para o array acima //
   users.push({
-    id,
+    id: uuidv4(),
     name,
     username,
     todos: []
@@ -30,7 +49,7 @@ app.post('/users', (request, response) => {
 });
 
 app.get('/todos', checksExistsUserAccount, (request, response) => {
-  // Complete aqui
+  return response.json(users.todos);
 });
 
 app.post('/todos', checksExistsUserAccount, (request, response) => {
