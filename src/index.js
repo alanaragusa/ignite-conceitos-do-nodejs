@@ -11,20 +11,24 @@ app.use(express.json());
 // array para armazenamento provisório dos users //
 const users = [];
 
+// middleware //
 function checksExistsUserAccount(request, response, next) {
   const { username } = request.headers; 
 
   // procurar se existe algum usuário com o username já cadastrado //
-  const users = users.find(users => users.username === username);
+  const user = users.find(user => user.username === username);
 
   // verificação da existência do usuário //
-  if(!users){
+  if(!user){
     return response.status(400).json({error:"User not found"})
   }
+
+  request.user = user;
 
   return next();
 }
 
+// cadastrar novo usuário //
 app.post('/users', (request, response) => {
   const { name, username } = request.body;
 
@@ -33,7 +37,7 @@ app.post('/users', (request, response) => {
     (users) => users.username === username
   );
 
-  if (usersAlreadyExists) {
+  if (userAlreadyExists) {
     return response.status(400).json({error: "User already exists."})
   };
   
@@ -48,8 +52,11 @@ app.post('/users', (request, response) => {
   return response.status(201).send();
 });
 
+// lista com todas as tarefas do usuário //
 app.get('/todos', checksExistsUserAccount, (request, response) => {
-  return response.json(users.todos);
+  const { user } = request;
+  
+  return response.json(user.todos);
 });
 
 app.post('/todos', checksExistsUserAccount, (request, response) => {
