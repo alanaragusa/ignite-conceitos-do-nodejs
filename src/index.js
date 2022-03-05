@@ -76,8 +76,23 @@ app.post('/todos', checksExistsUserAccount, (request, response) => {
   return response.status(201).send();
 });
 
+// atualizar tarefa - REVISAR! //
 app.put('/todos/:id', checksExistsUserAccount, (request, response) => {
-  // Complete aqui
+  // rota recebe pelo header a propriedade username //
+  const { user } = request;
+
+  // rota recebe pelo corpo da requisição o title e deadline //
+  const { title, deadline } = request.body;
+
+  // alterar apenas o title e deadline da tarefa que possua o id igual ao id presente nos parâmetros da rota //
+  const { id } = request.params;
+
+  if (id === user.id) {
+    user.title = title;
+    user.deadline = deadline;
+  }
+
+  return response.status(201).send();
 });
 
 app.patch('/todos/:id/done', checksExistsUserAccount, (request, response) => {
