@@ -38,7 +38,7 @@ app.post('/users', (request, response) => {
   );
 
   if (userAlreadyExists) {
-    return response.status(400).json({error: "User already exists."})
+    return response.status(400).json({error: "User already exists."});
   };
   
   const user = {
@@ -118,12 +118,13 @@ app.delete('/todos/:id', checksExistsUserAccount, (request, response) => {
 
   const deleteToDo = user.todos.findIndex(todo => todo.id === id);
 
+  // -1 indica que o todo não foi encontrado no array //
   if(deleteToDo === -1) {
     return response.status(404).json({error:"Todo not found"});
   }
   user.todos.splice(deleteToDo, 1);
   
-  return response.status(204).json(users);
+  return response.status(204).json();
 });
 
 module.exports = app;
