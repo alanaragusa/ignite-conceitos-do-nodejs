@@ -41,15 +41,17 @@ app.post('/users', (request, response) => {
     return response.status(400).json({error: "User already exists."})
   };
   
-  // push para enviar a informação para o array acima //
-  users.push({
+  const user = {
     id: uuidv4(),
     name,
     username,
     todos: []
-  });
+  };
 
-  return response.status(201).send();
+  // push para o array users acima //
+  users.push(user);
+
+  return response.status(201).send(user);
 });
 
 // lista com todas as tarefas do usuário //
