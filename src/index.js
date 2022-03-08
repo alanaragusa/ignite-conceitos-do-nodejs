@@ -20,7 +20,7 @@ function checksExistsUserAccount(request, response, next) {
 
   // verificação da existência do usuário //
   if(!user){
-    return response.status(400).json({error:"User not found"})
+    return response.status(404).json({error:"User not found"})
   }
 
   request.user = user;
@@ -88,7 +88,7 @@ app.put('/todos/:id', checksExistsUserAccount, (request, response) => {
   const updateToDo = user.todos.find(todo => todo.id === id);
 
   if(!updateToDo) {
-    return response.status(400).json({error:"Todo not found"});
+    return response.status(404).json({error:"Todo not found"});
   }
 
   updateToDo.title = title;
@@ -103,7 +103,7 @@ app.patch('/todos/:id/done', checksExistsUserAccount, (request, response) => {
 
   const statusToDoChange = user.todos.find(todo => todo.id === id);
   if (!statusToDoChange) {
-    return response.status(400).json({error:"Todo not found"});
+    return response.status(404).json({error:"Todo not found"});
   }
   statusToDoChange.done = true;
 
