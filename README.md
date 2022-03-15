@@ -20,34 +20,3 @@ Nesse desafio, criei uma aplicação backend para gerenciar tarefas. Será permi
 
 Tudo isso para cada usuário em específico - o `username` será passado pelo header.
 
-### :keyboard: Instalação e Execução do Projeto
-
-- Clone este repositório
-
-```
-> git clone https://github.com/prenato84/ignite-conceitos-nodejs
-```
-
-- Navegue até o diretório principal do projeto
-
-```
-> cd ignite-conceitos-nodejs
-```
-
-- Instale as dependências com o Yarn
-
-```
-yarn
-```
-
-- Rode a suite de testes
-
-```
-yarn test
-```
-
-- Execute o projeto
-
-```
-yarn dev
-```
