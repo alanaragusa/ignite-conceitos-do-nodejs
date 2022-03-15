@@ -4,10 +4,6 @@
   Desafio Conceitos do NodeJS
 </h3>
 
-<p align="center">
-  <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#keyboard-instalação-e-execução-do-projeto">Instalação e Execução do Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-
 ## :rocket: Sobre o desafio
 
 Nesse desafio, criei uma aplicação backend para gerenciar tarefas. Será permitida a criação de um usuário com `name` e `username`, bem como fazer o CRUD de *todos*:
